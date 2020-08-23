@@ -1,0 +1,139 @@
+version: '{build}'
+image: Visual Studio 2017
+
+environment:
+  BOOST_ROOT: C:\Libraries\boost_1_67_0
+  OPENSSL_ROOT_DIR: c:\hds-libs\openssl
+  BUILD_SERVER:
+    secure: 5oPcbgETrXo4nmgoqILqgzdjyghCp4tEsBR4gzpEall4E9Vy77ArnCHSRjtLIEai  
+  BUILD_CONFIG: RelWithDebInfo
+
+cache:
+  - c:\tools\vcpkg\installed\
+
+ 
+before_build:
+  - cmd: git submodule update --init --recursive
+  - cmd: git apply 3rdparty/protobuf-patch.diff
+  - cmd: git clone --depth=1 https://github.com/hadescoincom/libs.git c:/hds-libs
+  - cmd: cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=%BUILD_CONFIG% -DHDS_LINK_TYPE=Static -DBRANCH_NAME=%APPVEYOR_REPO_BRANCH% -DHDS_BUILD_JNI=On -DHDS_HW_WALLET=Off .
+
+test_script:
+  - cmd: ctest -C %BUILD_CONFIG% --verbose
+
+build_script:
+  - cmake --build . --parallel --config %BUILD_CONFIG%
+
+after_build:
+- ps: $env:DATE=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTime]::UtcNow, "Belarus Standard Time").ToString('yyyy.MM.dd')
+- ps: $env:TIME=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTime]::UtcNow, "Belarus Standard Time").ToString('HH:mm:ss')
+- ps: $env:HDS_TARGET_SUFFIX=''
+- ps: $env:HDS_DISPLAY_SUFFIX=''
+- ps: $env:HDS_DISPLAY_SUFFIX2=''
+- ps: $env:HDS_DISPLAY_SUFFIX3=''
+- cmd: >-
+    set /p HDS_VERSION=<hds_version.gen
+
+    echo HDS_VERSION = %HDS_VERSION%
+
+    del hds_version.gen
+    
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds/hds/hds-node.cfg
+    
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/cli/hds-wallet.cfg
+    
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/api/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/api/wallet-api.cfg
+
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/service/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%.exe
+
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/service/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%.exe
+
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/explorer/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds/explorer/explorer-node.cfg
+
+    7z a c:/projects/hds/hds/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/broadcaster/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%.exe
+        
+    mkdir pdb
+    
+    7z a c:/projects/hds/hds/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip "c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.pdb" "c:/projects/hds/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.pdb"
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\%BUILD_CONFIG%\broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+    copy c:\projects\hds\hds\hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\pdb\hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+
+
+on_success:
+- ps: $env:DATE=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTime]::UtcNow, "Belarus Standard Time").ToString('yyyy.MM.dd')
+- ps: $env:TIME=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTime]::UtcNow, "Belarus Standard Time").ToString('HH:mm:ss')
+- cmd: >-
+    set BUILDS_SERVER_PATH=%BUILD_SERVER%/files/%APPVEYOR_REPO_BRANCH%/%DATE%/Release/win
+              
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/pdb/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+
+artifacts:
+  - path: hds-node-%HDS_VERSION%.zip
+    name: HdsNode
+
+  - path: hds-wallet-cli-%HDS_VERSION%.zip
+    name: HdsWalletCli
+
+  - path: wallet-api-%HDS_VERSION%.zip
+    name: HdsWalletApi
+
+  - path: wallet-service-%HDS_VERSION%.zip
+    name: HdsWalletService
+
+  - path: sbbs-monitor-%HDS_VERSION%.zip
+    name: HdsSbbsMonitor
+
+  - path: explorer-node-%HDS_VERSION%.zip
+    name: HdsNodeExplorer
+
+  - path: broadcaster-%HDS_VERSION%.zip
+    name: HdsBroadcaster
+
+  - path: pdb/hds-pdb-%HDS_VERSION%.zip
+    name: HdsPdb
+
+deploy:
+  provider: S3
+  access_key_id:
+    secure: vku9qEnfo8NirxsplNRBBezWqJa1sV5eSfpt2syfwwk=
+  secret_access_key:
+    secure: sBTxw2gzbkQrPyMDF5OihFJ+s96yDgNgqbF1/MNmWpYMKrZwkOzIeExfW4Cp3F8B
+  bucket: builds.hadescoin.com
+  region: us-west-2
+  unzip: false
+  set_public: true
+  folder: "%APPVEYOR_REPO_BRANCH%/%DATE%/Release/win/"
+  artifact: HdsPdb, HdsWalletApi, HdsWalletService, HdsSbbsMonitor, HdsNodeExplorer, HdsWalletCli, HdsNode, HdsBroadcaster
+
+notifications:
+  - provider: Email
+    to:
+      - hadescoincom@gmail.com

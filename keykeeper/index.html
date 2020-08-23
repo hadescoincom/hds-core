@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <script src='wasm-key-keeper.js'></script>    
+    <script>
+
+        Module().then(function(Module) 
+        {
+            var phrase = Module.KeyKeeper.GeneratePhrase()
+            
+            console.log('seed phrase is: ', phrase);
+            console.log("IsAllowedWord('hurdle') -", Module.KeyKeeper.IsAllowedWord('hurdle'))
+            console.log("IsValidPhrase()", Module.KeyKeeper.IsValidPhrase(phrase))
+            console.log('world list size is', phrase.split(' ').length)
+
+            var keykeeper = new Module.KeyKeeper(phrase);
+            {
+
+                console.log('owner key is: ' + keykeeper.getOwnerKey("123"));
+                console.log('wallet ID is: ' + keykeeper.getWalletID());
+                
+                console.log('identity #0 is: ' + keykeeper.getIdentity("0"));
+
+                var id42 = "42";
+
+                var identity = keykeeper.getIdentity(id42);
+                console.log('identity #42 is: ' + keykeeper.getIdentity(id42));
+                
+                var address = keykeeper.getSbbsAddress(id42);
+                console.log('sbbs address #42 is: ' + address);
+                console.log('sbbs address private #42 is: ' + keykeeper.getSbbsAddressPrivate(id42));
+
+               //console.log('token #42 (no amount) is: ' + keykeeper.getSendToken(address, identity));
+                console.log('token #42 (amount is empty) is: ' + keykeeper.getSendToken(address, identity, ""));
+                console.log('token #42 (amount 0) is: ' + keykeeper.getSendToken(address, identity, "0"));
+                console.log('token #42 (amount 42) is: ' + keykeeper.getSendToken(address, identity, "42"));
+                console.log('token #42 (amount -42) is: ' + keykeeper.getSendToken(address, identity, "-42"));
+
+                var token = "6GhyHhPAT9ZWXBBgXL19fkQHRExjqJ8sgYuV4Phz7J9wPwf5EUgsuhuwHHiG4GMPc84cfcz2HTcxGXGVhMNhP7CVSH84UeaaU4HJ4NMbesJYCmjfwwTpJdMnNHAQ9hPatfEjg6qzFBgoKXLCCmetvuP1sBoPfLdfayQvKb1aRJaQYapufaXwa9KdrxjkZMHXdLsTet5n4rLiNfn1";
+                console.log('Converting token to json: ' + token);
+                console.log('Result: ' + Module.KeyKeeper.ConvertTokenToJson(token))
+                var res = JSON.parse(Module.KeyKeeper.ConvertTokenToJson(token));
+                console.log('res.params.PeerID=' + res.params.PeerID);
+                var token2 = Module.KeyKeeper.ConvertJsonToToken(JSON.stringify(res));
+                console.log('Back conversion: ' + token2);                
+                
+            }
+        })
+    </script>
+</html>
