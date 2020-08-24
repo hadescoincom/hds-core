@@ -194,7 +194,7 @@ std::vector<uint8_t> GetMinimalFromIndices(std::vector<uint32_t> sol) {
 
 int HdsHash_III::InitialiseState(blake2b_state& base_state) {
 	unsigned char personalization[BLAKE2B_PERSONALBYTES] = {};
-	memcpy(personalization, "Hds--PoW", 8);
+	memcpy(personalization, "Beam-PoW", 8);
 	memcpy(personalization+8,  &workBitSize, 4);
 	memcpy(personalization+12, &numRounds, 4);
 

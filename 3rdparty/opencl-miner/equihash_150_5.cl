@@ -109,7 +109,7 @@ ulong8 initBlake() {
 	result.s4 = blake_iv[4];
 	result.s5 = blake_iv[5];
 
-	result.s6 = blake_iv[6] ^ 0x576F502D2D736448;   // Equals personalization string "Hds--PoW"
+	result.s6 = blake_iv[6] ^ 0x576F502D6D616542;   // Equals personalization string "Beam-PoW"
 	
 	ulong value = 5;				// k
 	value = value << 32;
