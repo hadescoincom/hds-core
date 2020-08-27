@@ -32,6 +32,7 @@ If you build from source please use 'mainnet' branch\
 Peers:
 
 silicon-valley-nodes.mainnet.hadescoin.com:16668
+tokyo-nodes.mainnet.hadescoin.com:16668
 
 Latest documentation is here: https://documentation.hadescoin.com
 

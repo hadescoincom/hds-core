@@ -137,7 +137,7 @@ void NodeModel::onFailedToStartNode(io::ErrorCode /*errorCode*/)
 uint16_t NodeModel::getLocalNodePort()
 {
     // default value
-    return 10005;
+    return 16668;
 }
 
 std::string NodeModel::getLocalNodeStorage()

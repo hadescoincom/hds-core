@@ -144,7 +144,7 @@ JNIEXPORT jobject JNICALL HDS_JAVA_API_INTERFACE(createWallet)(JNIEnv *env, jobj
         
         if (restore)
         {
-            walletModel = make_unique<WalletModel>(walletDB, "127.0.0.1:10005", reactor);
+            walletModel = make_unique<WalletModel>(walletDB, "127.0.0.1:16668", reactor);
         }
         else
         {
