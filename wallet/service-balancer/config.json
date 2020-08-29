@@ -1,5 +1,5 @@
 {
-  "HdsNodeAddress":        "silicon-valley-nodes.masternet.hadescoin.com:16668",
+  "HdsNodeAddress":        "tokyo-nodes.masternet.hadescoin.com:16668",
   "WalletServicePath":      "/home/op/projects/hds/cmake-build-debug/wallet/service/wallet-service-masternet",
   "WalletServiceFirstPort": 30000,
   "WalletServiceLastPort":  30100,

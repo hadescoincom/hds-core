@@ -24,7 +24,7 @@ namespace hds
 #elif defined(HDS_MAINNET)
             "tokyo-nodes.mainnet.hadescoin.com:16668"
 #else
-            "tokyo-nodes.mainnet.hadescoin.com:16668"
+            "tokyo-nodes.masternet.hadescoin.com:16668"
 #endif
         };
 
@@ -36,11 +36,11 @@ namespace hds
         std::vector<std::string> result
         {
 #if defined(HDS_TESTNET)
-            "silicon-valley-nodes.testnet.hadescoin.com:16668"
+            "tokyo-nodes.testnet.hadescoin.com:16668"
 #elif defined(HDS_MAINNET)
-            "silicon-valley-nodes.testnet.hadescoin.com:16668"
+            "tokyo-nodes.mainnet.hadescoin.com:16668"
 #else
-            // "silicon-valley-nodes.masternet.hadescoin.com:16668"
+            // "tokyo-nodes.masternet.hadescoin.com:16668"
 #endif
         };
 
