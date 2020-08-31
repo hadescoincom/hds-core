@@ -38,39 +38,39 @@ after_build:
 
     del hds_version.gen
     
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds/hds/hds-node.cfg
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:/projects/hds-core/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.exe C:/projects/hds-core/hds-node.cfg
     
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/cli/hds-wallet.cfg
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/cli/hds-wallet.cfg
     
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/api/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/api/wallet-api.cfg
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/api/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/api/wallet-api.cfg
 
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/service/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%.exe
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/service/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%.exe
 
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/service/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%.exe
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/service/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%.exe
 
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/explorer/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds/explorer/explorer-node.cfg
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/explorer/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds/explorer/explorer-node.cfg
 
-    7z a c:/projects/hds/hds/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/broadcaster/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%.exe
+    7z a C:/projects/hds-core/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds/wallet/broadcaster/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%.exe
         
     mkdir pdb
     
-    7z a c:/projects/hds/hds/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip "c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.pdb" "c:/projects/hds/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.pdb"
+    7z a C:/projects/hds-core/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip "C:/projects/hds-core/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.pdb" "c:/projects/hds/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.pdb"
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:\projects\hds-core-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:\projects\hds-core-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\%BUILD_CONFIG%\broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\%BUILD_CONFIG%\broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
-    copy c:\projects\hds\hds\hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\pdb\hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:\projects\hds\pdb\hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
 
 on_success:
@@ -79,21 +79,21 @@ on_success:
 - cmd: >-
     set BUILDS_SERVER_PATH=%BUILD_SERVER%/files/%APPVEYOR_REPO_BRANCH%/%DATE%/Release/win
               
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
-    curl --retry 3 --ftp-create-dirs -T "c:/projects/hds/hds/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/pdb/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
+    curl --retry 3 --ftp-create-dirs -T "C:/projects/hds-core/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip" "%BUILDS_SERVER_PATH%/pdb/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip"
 
 artifacts:
   - path: hds-node-%HDS_VERSION%.zip
