@@ -121,17 +121,29 @@ artifacts:
     name: HdsPdb
 
 deploy:
-  provider: S3
-  access_key_id:
-    secure: vku9qEnfo8NirxsplNRBBezWqJa1sV5eSfpt2syfwwk=
-  secret_access_key:
-    secure: sBTxw2gzbkQrPyMDF5OihFJ+s96yDgNgqbF1/MNmWpYMKrZwkOzIeExfW4Cp3F8B
-  bucket: builds.hadescoin.com
-  region: us-west-2
-  unzip: false
-  set_public: true
-  folder: "%APPVEYOR_REPO_BRANCH%/%DATE%/Release/win/"
-  artifact: HdsPdb, HdsWalletApi, HdsWalletService, HdsSbbsMonitor, HdsNodeExplorer, HdsWalletCli, HdsNode, HdsBroadcaster
+#  provider: S3
+#  access_key_id:
+#    secure: vku9qEnfo8NirxsplNRBBezWqJa1sV5eSfpt2syfwwk=
+#  secret_access_key:
+#    secure: sBTxw2gzbkQrPyMDF5OihFJ+s96yDgNgqbF1/MNmWpYMKrZwkOzIeExfW4Cp3F8B
+#  bucket: builds.hadescoin.com
+#  region: us-west-2
+#  unzip: false
+#  set_public: true
+#  folder: "%APPVEYOR_REPO_BRANCH%/%DATE%/Release/win/"
+#  artifact: HdsPdb, HdsWalletApi, HdsWalletService, HdsSbbsMonitor, HdsNodeExplorer, HdsWalletCli, HdsNode, HdsBroadcaster
+
+  release: HdsCore-v$(APPVEYOR_BUILD_VERSION)
+  description: 'HdsCore Release'
+  provider: GitHub
+  auth_token:
+    secure: /Cj91YiCpTQRLfi0DR5BOPSdC1N1kg7mEtM46alx4B8dcKTm+/sOYtVK/pB16Ty9 # your encrypted token from GitHub
+  artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
 notifications:
   - provider: Email
