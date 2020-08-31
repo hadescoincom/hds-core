@@ -133,6 +133,7 @@ deploy:
 #  folder: "%APPVEYOR_REPO_BRANCH%/%DATE%/Release/win/"
 #  artifact: HdsPdb, HdsWalletApi, HdsWalletService, HdsSbbsMonitor, HdsNodeExplorer, HdsWalletCli, HdsNode, HdsBroadcaster
 
+  tag: online
   release: HdsCore-v$(APPVEYOR_BUILD_VERSION)
   description: 'HdsCore Release'
   provider: GitHub
