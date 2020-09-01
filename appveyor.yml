@@ -18,8 +18,8 @@ before_build:
   - cmd: git clone --depth=1 https://github.com/hadescoincom/libs.git c:/hds-libs
   - cmd: cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=%BUILD_CONFIG% -DHDS_LINK_TYPE=Static -DBRANCH_NAME=%APPVEYOR_REPO_BRANCH% -DHDS_BUILD_JNI=On -DHDS_HW_WALLET=Off .
 
-test_script:
-  - cmd: ctest -C %BUILD_CONFIG% --verbose
+#test_script:
+#  - cmd: ctest -C %BUILD_CONFIG% --verbose
 
 build_script:
   - cmake --build . --parallel --config %BUILD_CONFIG%
