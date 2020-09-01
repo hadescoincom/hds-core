@@ -38,17 +38,17 @@ after_build:
 
     del hds_version.gen
     
-    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.exe C:/projects/hds-core/hds-node.cfg
+    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.exe C:/projects/hds-core/hds/hds-node.cfg
     
-    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/cli/hds-wallet.cfg
+    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.exe c:/projects/hds-core/wallet/cli/hds-wallet.cfg
     
-    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/api/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%.exe c:/projects/hds/wallet/api/wallet-api.cfg
+    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/api/%BUILD_CONFIG%/wallet-api%HDS_TARGET_SUFFIX%.exe c:/projects/hds-core/wallet/api/wallet-api.cfg
 
     7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/service/%BUILD_CONFIG%/wallet-service%HDS_TARGET_SUFFIX%.exe
 
     7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/service/%BUILD_CONFIG%/sbbs-monitor%HDS_TARGET_SUFFIX%.exe
 
-    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/explorer/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds/explorer/explorer-node.cfg
+    7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/explorer/%BUILD_CONFIG%/explorer-node%HDS_TARGET_SUFFIX%.exe c:/projects/hds-core/explorer/explorer-node.cfg
 
     7z a C:/projects/hds-core/hds/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip c:/projects/hds-core/wallet/broadcaster/%BUILD_CONFIG%/broadcaster%HDS_TARGET_SUFFIX%.exe
         
