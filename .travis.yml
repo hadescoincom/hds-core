@@ -497,72 +497,71 @@ matrix:
 ###############################################################################
 # Common part
 ###############################################################################
-before_script:
-  - curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
-  - HDS_TARGET_SUFFIX="-masternet"
-  - HDS_DISPLAY_SUFFIX="Masternet"
-  - HDS_DISPLAY_SUFFIX2="-Masternet"
+#before_script:
+#  - curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
+#  - HDS_TARGET_SUFFIX="-masternet"
+#  - HDS_DISPLAY_SUFFIX="Masternet"
+#  - HDS_DISPLAY_SUFFIX2="-Masternet"
 
-after_success:
-  # deploy using ftp server
-  - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER
-  - tar -cvzf hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/hds hds-node$HDS_TARGET_SUFFIX hds-node.cfg
-  - tar -cvzf hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/cli hds-wallet$HDS_TARGET_SUFFIX hds-wallet.cfg
-  - tar -cvzf wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/api/ wallet-api$HDS_TARGET_SUFFIX wallet-api.cfg
-  # - tar -cvzf wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service wallet-service$HDS_TARGET_SUFFIX
-  # - tar -cvzf sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service sbbs-monitor$HDS_TARGET_SUFFIX
-  - tar -cvzf explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/explorer explorer-node$HDS_TARGET_SUFFIX explorer-node.cfg
-  - tar -cvzf broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/broadcaster broadcaster$HDS_TARGET_SUFFIX
-
-  # upload binaries to FTP
-  - curl --retry 3 --ftp-create-dirs -T hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-  - curl --retry 3 --ftp-create-dirs -T hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-  - curl --retry 3 --ftp-create-dirs -T wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-  # - curl --retry 3 --ftp-create-dirs -T wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-  # - curl --retry 3 --ftp-create-dirs -T sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-  - curl --retry 3 --ftp-create-dirs -T explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-  - curl --retry 3 --ftp-create-dirs -T broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
-
-  # upload binaries to FTP, to the latest folder
-  - BUILDS_SERVER_LATEST_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER
-  - curl --retry 3 --ftp-create-dirs -T hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/hds-node$HDS_TARGET_SUFFIX.tar.gz
-  - curl --retry 3 --ftp-create-dirs -T hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
-  - curl --retry 3 --ftp-create-dirs -T wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/wallet-api$HDS_TARGET_SUFFIX.tar.gz
-  # - curl --retry 3 --ftp-create-dirs -T wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/wallet-service$HDS_TARGET_SUFFIX.tar.gz
-  # - curl --retry 3 --ftp-create-dirs -T sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
-  - curl --retry 3 --ftp-create-dirs -T explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/explorer-node$HDS_TARGET_SUFFIX.tar.gz
-  - curl --retry 3 --ftp-create-dirs -T broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/broadcaster$HDS_TARGET_SUFFIX.tar.gz
-
-  # upload binaries to S3
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-  # - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-  # - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-
-  # prep for deploy to AWS S3, latest folder
-  - cp hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz hds-node$HDS_TARGET_SUFFIX.tar.gz
-  - cp hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
-  - cp wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz wallet-api$HDS_TARGET_SUFFIX.tar.gz
-  # - cp wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz wallet-service$HDS_TARGET_SUFFIX.tar.gz
-  # - cp sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
-  - cp explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz explorer-node$HDS_TARGET_SUFFIX.tar.gz
-  - cp broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz broadcaster$HDS_TARGET_SUFFIX.tar.gz
-
-  # upload binaries to S3, to the latest folder
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" hds-node$HDS_TARGET_SUFFIX.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" wallet-api$HDS_TARGET_SUFFIX.tar.gz
-  # - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" wallet-service$HDS_TARGET_SUFFIX.tar.gz
-  # - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" explorer-node$HDS_TARGET_SUFFIX.tar.gz
-  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" broadcaster$HDS_TARGET_SUFFIX.tar.gz
+#after_success:
+#  # deploy using ftp server
+#  - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER
+#  - tar -cvzf hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/hds hds-node$HDS_TARGET_SUFFIX hds-node.cfg
+#  - tar -cvzf hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/cli hds-wallet$HDS_TARGET_SUFFIX hds-wallet.cfg
+#  - tar -cvzf wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/api/ wallet-api$HDS_TARGET_SUFFIX wallet-api.cfg
+#  # - tar -cvzf wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service wallet-service$HDS_TARGET_SUFFIX
+#  # - tar -cvzf sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service sbbs-monitor$HDS_TARGET_SUFFIX
+#  - tar -cvzf explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/explorer explorer-node$HDS_TARGET_SUFFIX explorer-node.cfg
+#  - tar -cvzf broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/broadcaster broadcaster$HDS_TARGET_SUFFIX
+#
+#  # upload binaries to FTP
+#  - curl --retry 3 --ftp-create-dirs -T hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#  - curl --retry 3 --ftp-create-dirs -T hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#  - curl --retry 3 --ftp-create-dirs -T wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#  # - curl --retry 3 --ftp-create-dirs -T wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#  # - curl --retry 3 --ftp-create-dirs -T sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#  - curl --retry 3 --ftp-create-dirs -T explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#  - curl --retry 3 --ftp-create-dirs -T broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
+#
+#  # upload binaries to FTP, to the latest folder
+#  - BUILDS_SERVER_LATEST_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER
+#  - curl --retry 3 --ftp-create-dirs -T hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/hds-node$HDS_TARGET_SUFFIX.tar.gz
+#  - curl --retry 3 --ftp-create-dirs -T hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
+#  - curl --retry 3 --ftp-create-dirs -T wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/wallet-api$HDS_TARGET_SUFFIX.tar.gz
+#  # - curl --retry 3 --ftp-create-dirs -T wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/wallet-service$HDS_TARGET_SUFFIX.tar.gz
+#  # - curl --retry 3 --ftp-create-dirs -T sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
+#  - curl --retry 3 --ftp-create-dirs -T explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/explorer-node$HDS_TARGET_SUFFIX.tar.gz
+#  - curl --retry 3 --ftp-create-dirs -T broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_LATEST_PATH/broadcaster$HDS_TARGET_SUFFIX.tar.gz
+#
+#  # upload binaries to S3
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#  # - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#  # - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER/" broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
+#
+#  # prep for deploy to AWS S3, latest folder
+#  - cp hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz hds-node$HDS_TARGET_SUFFIX.tar.gz
+#  - cp hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
+#  - cp wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz wallet-api$HDS_TARGET_SUFFIX.tar.gz
+#  # - cp wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz wallet-service$HDS_TARGET_SUFFIX.tar.gz
+#  # - cp sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
+#  - cp explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz explorer-node$HDS_TARGET_SUFFIX.tar.gz
+#  - cp broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz broadcaster$HDS_TARGET_SUFFIX.tar.gz
+#
+#  # upload binaries to S3, to the latest folder
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" hds-node$HDS_TARGET_SUFFIX.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" wallet-api$HDS_TARGET_SUFFIX.tar.gz
+#  # - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" wallet-service$HDS_TARGET_SUFFIX.tar.gz
+#  # - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" explorer-node$HDS_TARGET_SUFFIX.tar.gz
+#  - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" broadcaster$HDS_TARGET_SUFFIX.tar.gz
 deploy:
   provider: releases
-  api_key:
-    secure: jFncVk3vgJHkkR98xG7339A5hykVXvyd77S+4ZsjX3quTonzEgYQTTHLth1vvHBjQE/EJh5zehSq+3uS8EK374bLYKsEJORJ/araWUAWr2ZyxabTCU229qDV/qY0bVo4JnGkaDj7D1trXA6Y9ejLPpQ9foA58GCDX63b7Z8G/b61x6DM9IY1JD9RePjPQfnotYh9GzhZ461mNzjHAKJWDZCrsbjU3K6kkWgFChzcDaKbaMXgiFk8zHkDNTcDZ/+V6MaNJXaldxm48K47UbeP0LS5ABE5wHDIHx3AHEyjiLn/LI61dIgI8lkZPkm8of6Li0IftqBGEJd/FtyLhIfQ7v55qrD0CoKAqjwkl3mLTkzwW0cVnt33E2oVvtRBlyghL+LmezoZ+Gon4yGvqEx3oYGOXBqNO7HYvgi5OGqPtH0dQRnKClzPa1/Socu3zsBVoWOKKIMwNjy5GWphzVIt4dhrQtj0sakZCywhyheJi1/j+ypXhyLQIbJxw8ypLQKlofYQHJ8a9jaNPFeFnqY7uzHYycYj8QEQA2ICFMm2+WofcqN6PfIERCNk1hBVzF3lbeZgyOLRXl2uk7iyyXHXI3us+Csrwb19rFI0+N/jOjSzkSji8HwC53mJpe2RSTG3hk2GaQf7ehe6bv3kEAk8jmHD9BxAL8zKIzKInD9QsJc=
+  api_key: ${GITHUB_TOKEN}
   file: FILE TO UPLOAD
   skip_cleanup: true
   on:
