@@ -142,8 +142,8 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branch: mainnet                 # release from master branch only
-    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+    branch: mainnet                 # release from mainnet branch only
+#    APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
 notifications:
   - provider: Email
