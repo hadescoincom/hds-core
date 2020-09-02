@@ -286,8 +286,8 @@ matrix:
         - echo HDS_VERSION = $HDS_VERSION
         - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI
         - BUILDS_SERVER_LATEST_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/latest/$BUILD_TYPE/android-$ANDROID_ABI
-        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
-        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni.tar.gz $BUILDS_SERVER_LATEST_PATH/
         - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI/" libwallet-jni-$HDS_VERSION.tar.gz
@@ -334,8 +334,8 @@ matrix:
         - echo HDS_VERSION = $HDS_VERSION
         - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI
         - BUILDS_SERVER_LATEST_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/latest/$BUILD_TYPE/android-$ANDROID_ABI
-        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
-        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni.tar.gz $BUILDS_SERVER_LATEST_PATH/
         - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI/" libwallet-jni-$HDS_VERSION.tar.gz
@@ -382,8 +382,8 @@ matrix:
         - echo HDS_VERSION = $HDS_VERSION
         - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI
         - BUILDS_SERVER_LATEST_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/latest/$BUILD_TYPE/android-$ANDROID_ABI
-        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
-        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni.tar.gz $BUILDS_SERVER_LATEST_PATH/
         - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI/" libwallet-jni-$HDS_VERSION.tar.gz
@@ -430,8 +430,8 @@ matrix:
         - echo HDS_VERSION = $HDS_VERSION
         - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI
         - BUILDS_SERVER_LATEST_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/latest/$BUILD_TYPE/android-$ANDROID_ABI
-        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
-        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
+        - tar -cvzf libwallet-jni.tar.gz --directory=$HOME/build/hadescoincom/hds-core/android libwallet-jni.so com
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
         - curl --retry 3 --ftp-create-dirs -T libwallet-jni.tar.gz $BUILDS_SERVER_LATEST_PATH/
         - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/android-$ANDROID_ABI/" libwallet-jni-$HDS_VERSION.tar.gz
@@ -479,10 +479,10 @@ matrix:
       install:
         - export BALANCER_PATH=wallet/service-balancer
       script:
-        - cd $HOME/build/hadescoincom/hds/wallet/service-balancer/ && go build
+        - cd $HOME/build/hadescoincom/hds-core/wallet/service-balancer/ && go build
       after_success:
-        - tar cvzf service-balancer.tar.gz --directory=$HOME/build/hadescoincom/hds/wallet/service-balancer/ service-balancer  config.json
-        - cd $HOME/build/hadescoincom/hds/wallet/service-balancer && ls
+        - tar cvzf service-balancer.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service-balancer/ service-balancer  config.json
+        - cd $HOME/build/hadescoincom/hds-core/wallet/service-balancer && ls
         - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$TARGET_TYPE
         - curl --retry 3 --ftp-create-dirs -T service-balancer.tar.gz $BUILDS_SERVER_PATH/
         - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$TARGET_TYPE/" service-balancer.tar.gz
@@ -500,13 +500,13 @@ before_script:
 after_success:
   # deploy using ftp server
   - BUILDS_SERVER_PATH=${BUILD_SERVER}/files/$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$OS_FOLDER
-  - tar -cvzf hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/hds hds-node$HDS_TARGET_SUFFIX hds-node.cfg
-  - tar -cvzf hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/wallet/cli hds-wallet$HDS_TARGET_SUFFIX hds-wallet.cfg
-  - tar -cvzf wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/wallet/api/ wallet-api$HDS_TARGET_SUFFIX wallet-api.cfg
-  - tar -cvzf wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/wallet/service wallet-service$HDS_TARGET_SUFFIX
-  - tar -cvzf sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/wallet/service sbbs-monitor$HDS_TARGET_SUFFIX
-  - tar -cvzf explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/explorer explorer-node$HDS_TARGET_SUFFIX explorer-node.cfg
-  - tar -cvzf broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds/wallet/broadcaster broadcaster$HDS_TARGET_SUFFIX
+  - tar -cvzf hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/hds hds-node$HDS_TARGET_SUFFIX hds-node.cfg
+  - tar -cvzf hds-wallet-cli$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/cli hds-wallet$HDS_TARGET_SUFFIX hds-wallet.cfg
+  - tar -cvzf wallet-api$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/api/ wallet-api$HDS_TARGET_SUFFIX wallet-api.cfg
+  - tar -cvzf wallet-service$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service wallet-service$HDS_TARGET_SUFFIX
+  - tar -cvzf sbbs-monitor$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/service sbbs-monitor$HDS_TARGET_SUFFIX
+  - tar -cvzf explorer-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/explorer explorer-node$HDS_TARGET_SUFFIX explorer-node.cfg
+  - tar -cvzf broadcaster$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz --directory=$HOME/build/hadescoincom/hds-core/wallet/broadcaster broadcaster$HDS_TARGET_SUFFIX
     
   # upload binaries to FTP
   - curl --retry 3 --ftp-create-dirs -T hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz $BUILDS_SERVER_PATH/
