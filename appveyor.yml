@@ -56,7 +56,7 @@ after_build:
     
     7z a C:/projects/hds-core/hds/hds-pdb%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip "C:/projects/hds-core/hds/%BUILD_CONFIG%/hds-node%HDS_TARGET_SUFFIX%.pdb" "c:/projects/hds-core/wallet/cli/%BUILD_CONFIG%/hds-wallet%HDS_TARGET_SUFFIX%.pdb"
 
-    copy C:\projects\hds-core\hds\%BUILD_CONFIG%\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:\projects\hds-core\hds-core-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
+    copy C:\projects\hds-core\hds\%BUILD_CONFIG%\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:\projects\hds-core\hds-node%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
     copy C:\projects\hds-core\hds\%BUILD_CONFIG%\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip C:\projects\hds-core\hds-wallet-cli%HDS_TARGET_SUFFIX%-%HDS_VERSION%.zip
 
@@ -142,7 +142,7 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branch: master                 # release from master branch only
+    branch: mainnet                 # release from master branch only
     APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
 notifications:
