@@ -554,14 +554,14 @@ after_success:
   - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" explorer-node$HDS_TARGET_SUFFIX.tar.gz
   - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" broadcaster$HDS_TARGET_SUFFIX.tar.gz
 
-#deploy:
-#  provider: releases
-#  api_key: "GITHUB OAUTH TOKEN"
-#  file: "FILE TO UPLOAD"
-#  skip_cleanup: true
-#  on:
-#    tags: true
-#
+deploy:
+  provider: releases
+  api_key: "COxwWU1+HrtUscwTrk9Gm8aXeJtv5KH6J22MzuOL7kM1Rf3wRmd07G47DsrsxdPEKktvRNApxpiqI9wYQPAbEfAbkbemN1LtVVtb/MQzjpfcl9lsDYi1UOTXrHBrvY0FuNAi2+yg4SgCiBlcluE/BPprhCpcvcx41dkSnVWRqkGJbKPrjGFZsMmJz/xDsy17X23/HmFnDdZhoBGxOKR6uL6PliXLUDIfV+CbTCbd1jqHMHi7raj0IzGy3CbDIaAn5+YnYW97GE3I7R9u/3DxtXLhhekV8PhENYGylHWShj5F16DU9lRpoyMffoKze7yfMBMkWaM2eqO/tlMLOrPafBaAodArgMvBInTQtRU6F+SVUC1w5MiEJVvewAeciKGVNXPBxNsEQfXRvqN9WpeNfvPw38rb1x2OOvyOkqE9Hv7BiGoLDdi/HeYB1mFUWfOf7GpKd2ih5Gyww0Qp1p4vyc5QcZq+gKRSzOhjQX0wpeCeGwK3bb5qXXvopWT9MlSiheV8jWhfm6LvF4lfbmwNsYF8d9qM5Sx5Oa9MrJsUr2eM8Vw0KF5jY24zMdgviBT9ix/gGobZpQSoZKH72HCuEmedpG9V//WmtnnsILUJXMm8POeay99IX3rCVhjm8pbC6fyiH9I7cLmT1G1/8DJGqdbFfENjidtxoHrAu85RMlo="
+  file: "FILE TO UPLOAD"
+  skip_cleanup: true
+  on:
+    tags: true
+
 notifications:
   email:
     - hadescoincom@gmail.com
