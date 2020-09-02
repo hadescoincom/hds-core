@@ -562,14 +562,7 @@ matrix:
 deploy:
   provider: releases
   api_key: ${GITHUB_TOKEN}
-  file:  # update some file
-    - hds-node$HDS_TARGET_SUFFIX-$HDS_VERSION.tar.gz
-    - hds-wallet-cli$HDS_TARGET_SUFFIX.tar.gz
-    - wallet-api$HDS_TARGET_SUFFIX.tar.gz
-    - wallet-service$HDS_TARGET_SUFFIX.tar.gz
-    - sbbs-monitor$HDS_TARGET_SUFFIX.tar.gz
-    - explorer-node$HDS_TARGET_SUFFIX.tar.gz
-    - broadcaster$HDS_TARGET_SUFFIX.tar.gz
+  file: $TRAVIS_BRANCH/latest/$BUILD_TYPE/*
   skip_cleanup: true
   on:
     tags: true
