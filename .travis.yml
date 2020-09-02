@@ -488,9 +488,9 @@ matrix:
         - artifacts upload --target-paths "$TRAVIS_BRANCH/$(date +%Y.%m.%d)/$BUILD_TYPE/$TARGET_TYPE/" service-balancer.tar.gz
         - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$TARGET_TYPE/" service-balancer.tar.gz
 
-###############################################################################
+##############################################################################
 # Common part
-###############################################################################
+##############################################################################
 before_script:
   - curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
   - HDS_TARGET_SUFFIX=""
