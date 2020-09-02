@@ -75,7 +75,7 @@ matrix:
         - git apply 3rdparty/protobuf-patch.diff
         - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DDEBUG_MESSAGES_IN_RELEASE_MODE=On -DHDS_LINK_TYPE=Static -DBRANCH_NAME=$TRAVIS_BRANCH -DHDS_SIGN_MACOS_BINARY=On -DHDS_HW_WALLET=Off .
         - make -j$(sysctl -n hw.ncpu)
-        - ctest --verbose
+#        - ctest --verbose
         # extract build version
         - HDS_VERSION="$(cat hds_version.gen)" && rm hds_version.gen
         - echo HDS_VERSION = $HDS_VERSION
@@ -240,7 +240,7 @@ matrix:
         - git apply 3rdparty/protobuf-patch.diff
         - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DDEBUG_MESSAGES_IN_RELEASE_MODE=On -DHDS_LINK_TYPE=Static -DBRANCH_NAME=$TRAVIS_BRANCH -DHDS_HW_WALLET=Off .
         - make -j$(nproc)
-        - ctest --verbose
+#        - ctest --verbose
         # extract build version
         - HDS_VERSION="$(cat hds_version.gen)" && rm hds_version.gen
         - echo HDS_VERSION = $HDS_VERSION
@@ -554,6 +554,14 @@ after_success:
   - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" explorer-node$HDS_TARGET_SUFFIX.tar.gz
   - artifacts upload --target-paths "$TRAVIS_BRANCH/latest/$BUILD_TYPE/$OS_FOLDER/" broadcaster$HDS_TARGET_SUFFIX.tar.gz
 
+#deploy:
+#  provider: releases
+#  api_key: "GITHUB OAUTH TOKEN"
+#  file: "FILE TO UPLOAD"
+#  skip_cleanup: true
+#  on:
+#    tags: true
+#
 notifications:
   email:
     - hadescoincom@gmail.com
